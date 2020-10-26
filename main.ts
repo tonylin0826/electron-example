@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, ipcMain, Notification } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -76,6 +76,19 @@ try {
       createWindow();
     }
   });
+
+  ipcMain.handle('test-handle', async () => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const notification = {
+          title: 'Basic Notification',
+          body: 'Notification from the Main process'
+        }
+        new Notification(notification).show();
+        resolve();
+      }, 3000);
+    });
+  })
 
 } catch (e) {
   // Catch Error
