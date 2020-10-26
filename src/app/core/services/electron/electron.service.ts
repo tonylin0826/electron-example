@@ -14,7 +14,7 @@ export class ElectronService {
   webFrame: typeof webFrame;
   remote: typeof remote;
   childProcess: typeof childProcess;
-  fs: typeof fs;
+  public fs: typeof fs;
 
   get isElectron(): boolean {
     return !!(window && window.process && window.process.type);
